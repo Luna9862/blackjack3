@@ -8,10 +8,14 @@ public class Deck implements DeckActions {
 
     public Deck() {
         this.myCards = new ArrayList<>();
+        populateDeck();
+    }
 
+    private void populateDeck() {
+        myCards.clear();
         for (Suits suit : Suits.values()) {
             for (Values value : Values.values()) {
-                this.myCards.add(new Card(suit, value));
+                myCards.add(new Card(suit, value));
             }
         }
     }
@@ -23,10 +27,12 @@ public class Deck implements DeckActions {
 
     @Override
     public Card dealNextCard() {
-        if (!myCards.isEmpty()) {
-            return myCards.remove(0);
+        if (myCards.isEmpty()) {
+            System.out.println("Deck is empty. Reshuffling...");
+            populateDeck();
+            shuffle();
         }
-        return null;
+        return myCards.isEmpty() ? null : myCards.remove(0);
     }
 
     @Override
