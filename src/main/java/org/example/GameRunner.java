@@ -31,7 +31,7 @@ public class GameRunner {
                 player.adjustBalance(150); // Example win amount for Blackjack
             } else if (dealer.hasBlackjack()) {
                 System.out.println("Dealer has Blackjack! You lose.");
-                player.adjustBalance(-150); // Example loss amount for Blackjack
+                player.adjustBalance(-100); // Example loss amount for Blackjack
             } else {
                 // Player's turn
                 boolean playerBusted = false;
@@ -47,6 +47,7 @@ public class GameRunner {
                         if (player.getHandValue() > 21) {
                             System.out.println("Your hand: " + player.getHand() + " Value: " + player.getHandValue());
                             System.out.println("You bust!");
+                            player.adjustBalance(-100); // Deduct default bet amount
                             playerBusted = true;
                             break;
                         }
